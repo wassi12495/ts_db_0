@@ -13,23 +13,38 @@
             <input type="text" class="form-control" placeholder="Last Name" v-model="lastName" required>
           </div>
         </div>
-        <BirthdaySelector @monthChange="changeMonth" @dayChange="changeDay" @yearChange="changeYear" min="0"></BirthdaySelector>
+        <!-- <BirthdaySelector @monthChange="changeMonth" @dayChange="changeDay" @yearChange="changeYear" min="0"></BirthdaySelector> -->
+        <div class="row">
+          <div class="form-group col-sm-4">
+            <label for="birthday">Birthday</label>
+            <input class="form-control" type="date" v-model="birthday" required>
+          </div>
+        </div>
         <div class="row">
           <div class="form-group col">
               <label for="email">Email Address</label>
-              <input type="email" class="form-control"  id="email" placeholder="Email Address" v-model="email" required>
+              <input 
+              type="email" 
+              class="form-control"  
+              id="email" 
+              placeholder="Email Address" 
+              v-model="email" 
+              :pattern="emailPattern" 
+              :title="emailErrorMsg"
+              required>
           </div>
           <div class="form-group col">  
-              <label for="phone">Phone Numnber</label>
+              <label for="phone">Phone Number</label>
               <input type="tel" class="form-control" 
               placeholder="(xxx)-xxx-xxxx" 
               pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
               required v-model="phone">
           </div>
+          
 
 
         </div>
-        <input class="btn btn-primary" type="submit"></input>
+        <input class="btn btn-primary" type="submit">
 
       </form>
 
@@ -40,7 +55,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import axios from "axios";
-
+import { Action } from "vuex-class";
 import { Watch } from "vue-property-decorator";
 import BirthdaySelector from "./birthdaySelector.vue";
 @Component({
@@ -49,31 +64,17 @@ import BirthdaySelector from "./birthdaySelector.vue";
   }
 })
 export default class Form extends Vue {
-  firstName: string = null;
-  lastName: string = null;
-  day: number = null;
-  month: number = null;
-  year: number = null;
-  email: string = null;
-  phone: string = null;
+  @Action("newPerson") newPerson;
+  @Action("getPeople") getPeople;
+  private firstName: string = null;
+  private lastName: string = null;
+  private birthday: string = null;
+  // private day: number = null;
+  // private month: number = null;
+  // private year: number = null;
+  private email: string = null;
+  private phone: string = null;
   // onChange(name: string): void {}
-
-  @Watch("firstName")
-  @Watch("lastName")
-  onChange(value: string) {
-    // axios
-    //   .get("http://localhost:9000/")
-    //   .then(res => {
-    //     console.log(res);
-    //     this.data = res.data;
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
-    // console.log(this.firstName);
-    // console.log(this.lastName);
-    // this.firstName = value
-  }
 
   checkStatus(value: any) {
     console.log(value);
@@ -92,7 +93,15 @@ export default class Form extends Vue {
     console.log("Year", this.year);
   }
 
-  handleSubmit(e) {
+  get emailPattern() {
+    // Require @ and .
+    return "[a-zA-Z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$";
+  }
+  get emailErrorMsg() {
+    return "Email address must contain '@' and a valid domain name (e.g. .com, .org, .co.uk, etc)";
+  }
+
+  handleSubmit(e: any) {
     // axios.get("localhost:9000").then(resp => {
     //   console.log(resp);
     // });
@@ -101,25 +110,22 @@ export default class Form extends Vue {
     console.log("Submit");
     console.log("First", this.firstName);
     console.log("Last", this.lastName);
-    console.log("Birthday", this.month, "-", this.day, "-", this.year);
+    console.log("Birthday", this.birthday);
+
+    // console.log("Birthday", this.month, "-", this.day, "-", this.year);
     console.log("Email", this.email);
     console.log("Phone", this.phone);
     const person = {
       firstName: this.firstName,
       lastName: this.lastName,
-      birthday: {
-        month: this.month,
-        day: this.day,
-        year: this.year
-      },
+      birthday: this.birthday,
+
       email: this.email,
       phone: this.phone
     };
     console.log(person);
-    axios
-      .post("http://localhost:9000/createPerson", person)
+    this.newPerson(person)
       .then(resp => {
-        console.log(resp);
         this.$router.push("/grid");
       })
       .catch(error => {

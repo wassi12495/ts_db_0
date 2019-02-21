@@ -35,18 +35,12 @@ export default class GridTable extends Vue {
     };
   }
   get rowData() {
-    //test
     // User data formatted for ag_grid
-    console.log(this.people);
-    const formattedData: any = this.people.map(p => {
-      console.log(p);
-      let b: object = p.birthday;
-      console.log(b);
-
+    const formattedData: any = this.people.map((p: any) => {
       return {
         first: p.firstName,
         last: p.lastName,
-        birthday: b.month + "-" + b.day + "-" + b.year,
+        birthday: p.birthday,
         email: p.email,
         phone: p.phone
       };
