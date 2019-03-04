@@ -1,3 +1,5 @@
+const URL = 'http://localhost:9000';
+
 import Vue from 'vue';
 import Vuex from 'vuex';
 import Axios from 'axios';
@@ -33,6 +35,12 @@ export const actions = {
     Axios.post('http://localhost:9000/createPerson', person).then(resp => {
       console.log(resp);
       commit('personCreated', resp.data);
+    });
+  },
+  testValidation({ commit }: any) {
+    console.log('test');
+    Axios.post(`${URL}/test`).then(resp => {
+      console.log(resp);
     });
   },
 };
