@@ -10,7 +10,14 @@
       "description": "The Person's last name"
     },
     "email": {
-      "type": "number"
+      "type": "string"
+    },
+    "birthday": {
+      "type": "string"
+    },
+    "friends": {
+      "type": "string"
     }
-  }
+  },
+  "required": ["friends"]
 }

@@ -32,8 +32,8 @@ let data = {
 };
 
 router.post('/test', (req, res) => {
-  console.log(validate);
-  var valid = validate(req.body);
+  // console.log(validate);
+  var valid = validate(data);
   console.log(valid);
   if (!valid) console.log(validate.errors);
   res.send(valid);

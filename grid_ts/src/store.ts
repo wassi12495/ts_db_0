@@ -38,7 +38,6 @@ export const actions = {
     });
   },
   testValidation({ commit }: any) {
-    console.log('test');
     Axios.post(`${URL}/test`).then(resp => {
       console.log(resp);
     });
