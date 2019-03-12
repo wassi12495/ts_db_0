@@ -10,14 +10,19 @@
       "description": "The Person's last name"
     },
     "email": {
-      "type": "string"
+      "type": "string",
+      "format": "email"
     },
     "birthday": {
-      "type": "string"
+      "type": "string",
+      "format": "date",
+      "editable": "false"
     },
-    "friends": {
-      "type": "string"
+    "phone": {
+      "type": "string",
+      "pattern": "^([0-9]{3})?[0-9]{3}[0-9]{4}$",
+      "editable": "true"
     }
   },
-  "required": ["friends"]
+  "required": ["firstName", "email", "phone", "birthday"]
 }
