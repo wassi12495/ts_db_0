@@ -29,14 +29,16 @@ let data = {
   birthday: '2999-09-17',
   email: 'email@address.com',
   phone: '7777777777',
+  credit_card: 1234567812345678,
+  billing_address:"Address"
 };
 
 // "pattern": "^[a-zA-Z0-9._%+-]+@[a-z0-9]+.[a-z]{3}$"
 
-router.post('/createPerson', (req, res) => {
+router.post('/test', (req, res) => {
   // console.log(validate);
-  console.log(req.body);
-  var valid = validate(req.body);
+  console.log(data);
+  var valid = validate(data);
 
   console.log(valid);
   if (!valid) console.log(validate.errors);

@@ -22,7 +22,16 @@
       "type": "string",
       "pattern": "^([0-9]{3})?[0-9]{3}[0-9]{4}$",
       "editable": "true"
+    },
+    "credit_card": {
+      "type": "number"
+    },
+    "billing_address": {
+      "type": "string"
     }
   },
-  "required": ["firstName", "email", "phone", "birthday"]
+  "required": ["firstName", "email", "phone", "birthday"],
+  "dependencies": {
+    "credit_card": ["billing_address"]
+  }
 }
