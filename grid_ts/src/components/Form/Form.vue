@@ -73,9 +73,9 @@ export default class Form extends Vue {
   private firstName: string = null;
   private lastName: string = null;
   private birthday: string = null;
-  // private day: number = null;
-  // private month: number = null;
-  // private year: number = null;
+  private day: number;
+  private month: number;
+  private year: number;
   private email: string = null;
   private phone: string = null;
   // onChange(name: string): void {}
