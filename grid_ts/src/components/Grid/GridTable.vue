@@ -5,6 +5,8 @@
       :rowData="rowData"
       :enableFilter='true'
       :enableSorting='true'
+      rowSelection="single"
+      @row-selected="onRowSelected"
     ></ag-grid-vue>
 </template>
 
@@ -12,7 +14,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import Prop from "vue-property-decorator";
-import { State, Getter } from "vuex-class";
+import { State, Getter, Action } from "vuex-class";
 import { AgGridVue } from "ag-grid-vue";
 
 @Component({
@@ -22,6 +24,7 @@ import { AgGridVue } from "ag-grid-vue";
 })
 export default class GridTable extends Vue {
   @Getter("people") people;
+  @Action("rowSelected") rowSelected;
 
   data() {
     return {
@@ -42,10 +45,15 @@ export default class GridTable extends Vue {
         last: p.lastName,
         birthday: p.birthday,
         email: p.email,
-        phone: p.phone
+        phone: p.phone,
+        id: p.id
       };
     });
     return formattedData;
+  }
+  onRowSelected(e: any) {
+    console.log(e);
+    this.rowSelected(e.data.id);
   }
 }
 </script>

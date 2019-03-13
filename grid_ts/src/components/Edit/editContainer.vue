@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-
+    <h1>Edit page</h1>
   </div>
 </template>
 
@@ -10,7 +10,6 @@ import Component from "vue-class-component";
 import axios from "axios";
 import { Action } from "vuex-class";
 
-@Component({})
 export default class EditContainer extends Vue {}
 </script>
 

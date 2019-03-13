@@ -65,7 +65,6 @@ import Component from "vue-class-component";
 import axios from "axios";
 import { Action } from "vuex-class";
 import { Watch } from "vue-property-decorator";
-@Component({})
 export default class Form extends Vue {
   @Action("newPerson") newPerson;
   @Action("getPeople") getPeople;

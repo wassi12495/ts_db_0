@@ -1,13 +1,21 @@
-let express = require("express");
-let bodyParser = require("body-parser");
+let express = require('express');
+let bodyParser = require('body-parser');
 let router = express.Router();
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
 let people = [];
+people.push({
+  firstName: 'Josh',
+  lastName: 'wasserman',
+  birthday: '2999-09-17',
+  email: 'email@address.com',
+  phone: '7777777777',
+  id: 0,
+});
 
-router.get("/", (req, res) => {
+router.get('/', (req, res) => {
   res.send(people);
 });
 
@@ -18,24 +26,24 @@ router.get("/", (req, res) => {
 // });
 
 // Testing schema
-var Ajv = require("ajv");
+var Ajv = require('ajv');
 var ajv = new Ajv();
-var validationSchema = require("./schemas/validation_schema.json");
+var validationSchema = require('./schemas/validation_schema.json');
 var validate = ajv.compile(validationSchema);
 
 let data = {
-  firstName: "Josh",
-  lastName: "wasserman",
-  birthday: "2999-09-17",
-  email: "email@address.com",
-  phone: "7777777777",
+  firstName: 'Josh',
+  lastName: 'wasserman',
+  birthday: '2999-09-17',
+  email: 'email@address.com',
+  phone: '7777777777',
   credit_card: 1234567812345678,
-  billing_address: "Address"
+  billing_address: 'Address',
 };
 
 // "pattern": "^[a-zA-Z0-9._%+-]+@[a-z0-9]+.[a-z]{3}$"
 
-router.post("/test", (req, res) => {
+router.post('/test', (req, res) => {
   // console.log(validate);
   console.log(data);
   var valid = validate(data);
@@ -48,5 +56,5 @@ router.post("/test", (req, res) => {
   res.send(valid);
 });
 module.exports = {
-  router
+  router,
 };

@@ -8,10 +8,12 @@ Vue.use(Vuex);
 
 export const state: any = {
   people: [],
+  rowSelected: null,
 };
 
 export const getters = {
   people: (state: any) => state.people,
+  rowSelected: (state: any) => state.rowSelected,
 };
 export const mutations = {
   setPeople(state: any, data: any[]) {
@@ -21,6 +23,10 @@ export const mutations = {
   personCreated(state: any, data: any) {
     console.log('Add newly created person', data);
     state.people.push(data);
+  },
+  rowSelected(state: any, data: any) {
+    console.log('Row Selected');
+    state.rowSelected = data;
   },
 };
 
@@ -41,6 +47,9 @@ export const actions = {
     Axios.post(`${URL}/test`).then(resp => {
       console.log(resp);
     });
+  },
+  rowSelected({ commit }: any, selection: any) {
+    console.log(selection);
   },
 };
 
