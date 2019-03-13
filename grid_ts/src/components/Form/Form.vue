@@ -136,7 +136,7 @@ export default class Form extends Vue {
     console.log(person);
     this.newPerson(person)
       .then(resp => {
-        this.$router.push("/grid");
+        this.$router.push("/");
       })
       .catch(error => {
         console.log(error);

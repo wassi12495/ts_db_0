@@ -11,14 +11,14 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '/new',
       name: 'Form',
-      component: Form
+      component: Form,
     },
     {
-      path: '/grid',
+      path: '/',
       name: 'grid',
-      component: Grid
-    }
-  ]
+      component: Grid,
+    },
+  ],
 });
