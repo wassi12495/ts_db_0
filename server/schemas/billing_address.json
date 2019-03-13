@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "title": "billing_address",
+  "properties": {
+    "city": {
+      "type": "string"
+    }
+  }
+}
