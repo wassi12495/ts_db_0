@@ -54,6 +54,8 @@ export default class GridTable extends Vue {
   onRowSelected(e: any) {
     console.log(e);
     this.rowSelected(e.data.id);
+    console.log(this.$router);
+    this.$router.push(`/edit/${e.data.id}`);
   }
 }
 </script>

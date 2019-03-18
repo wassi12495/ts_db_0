@@ -10,7 +10,11 @@ import Component from "vue-class-component";
 import axios from "axios";
 import { Action } from "vuex-class";
 
-export default class EditContainer extends Vue {}
+export default class EditContainer extends Vue {
+  mounted() {
+    console.log("Edit container");
+  }
+}
 </script>
 
 <style>

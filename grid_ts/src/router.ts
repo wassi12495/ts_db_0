@@ -20,7 +20,7 @@ export default new Router({
       component: Grid,
     },
     {
-      path: '/edit',
+      path: '/edit/:id',
       name: 'Edit',
       component: EditContainer,
     },
