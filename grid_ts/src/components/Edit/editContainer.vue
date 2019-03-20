@@ -15,6 +15,7 @@ export default class EditContainer extends Vue {
   @Getter("editing") editing;
 
   mounted() {
+    // Fix this to be reactivie to changes in store.editing
     console.log("Edit container", this.$route.params);
     this.rowSelected(this.$route.params.id);
   }
