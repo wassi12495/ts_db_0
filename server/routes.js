@@ -3,19 +3,31 @@ let bodyParser = require('body-parser');
 let router = express.Router();
 
 router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({ extended: true }));
+// router.use(bodyParser.urlencoded({ extended: true }));
 
-let people = [];
-people.push({
-  firstName: 'Josh',
-  lastName: 'wasserman',
+let people = {};
+
+let sample1 = {
+  first: 'Josh',
+  last: 'wasserman',
   birthday: '2999-09-17',
   email: 'email@address.com',
   phone: '7777777777',
-  id: 0,
-});
+  id: 0
+};
+let sample2 = {
+  first: 'J',
+  last: 'wass',
+  birthday: '2999-09-17',
+  email: 'email@address.com',
+  phone: '7777777777',
+  id: 10
+};
 
-router.get('/', (req, res) => {
+people[`${sample1.id}`] = sample1;
+people[`${sample2.id}`] = sample2;
+
+router.get('/users', (req, res) => {
   res.send(people);
 });
 
@@ -32,13 +44,13 @@ var validationSchema = require('./schemas/validation_schema.json');
 var validate = ajv.compile(validationSchema);
 
 let data = {
-  firstName: 'Josh',
-  lastName: 'wasserman',
+  first: 'Josh',
+  last: 'wasserman',
   birthday: '2999-09-17',
   email: 'email@address.com',
   phone: '7777777777',
   credit_card: 1234567812345678,
-  billing_address: 'Address',
+  billing_address: 'Address'
 };
 
 // "pattern": "^[a-zA-Z0-9._%+-]+@[a-z0-9]+.[a-z]{3}$"
@@ -56,5 +68,14 @@ router.post('/test', (req, res) => {
   res.send(valid);
 });
 module.exports = {
-  router,
+  router
 };
+
+router.get(`/user/:id`, (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  let user = people[id];
+  res.body = user;
+  console.log(res.body);
+  res.send(res.body);
+});
