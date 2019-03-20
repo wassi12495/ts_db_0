@@ -8,11 +8,15 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import axios from "axios";
-import { Action } from "vuex-class";
-
+import { Action, Getter } from "vuex-class";
+@Component({})
 export default class EditContainer extends Vue {
+  @Action("rowSelected") rowSelected;
+  @Getter("editing") editing;
+
   mounted() {
-    console.log("Edit container");
+    console.log("Edit container", this.$route.params);
+    this.rowSelected(this.$route.params.id);
   }
 }
 </script>
