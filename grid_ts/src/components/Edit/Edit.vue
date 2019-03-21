@@ -10,7 +10,7 @@ import Component from "vue-class-component";
 import axios from "axios";
 import { Action, Getter } from "vuex-class";
 @Component({})
-export default class EditContainer extends Vue {
+export default class Edit extends Vue {
   @Action("rowSelected") rowSelected;
   @Getter("editing") editing;
 

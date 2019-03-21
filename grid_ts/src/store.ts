@@ -9,13 +9,13 @@ Vue.use(Vuex);
 export const state: any = {
   people: {},
   rowSelected: null,
-  editing: {}
+  editing: {},
 };
 
 export const getters = {
   people: (state: any) => state.people,
   rowSelected: (state: any) => state.rowSelected,
-  editing: (state: any) => state.editing
+  editing: (state: any) => state.editing,
 };
 export const mutations = {
   setPeople(state: any, data: any[]) {
@@ -35,7 +35,7 @@ export const mutations = {
   editUser(state: any, data: any) {
     console.log(data);
     state.editing = data;
-  }
+  },
 };
 
 export const actions = {
@@ -66,12 +66,12 @@ export const actions = {
         console.log('hello', res);
         return res;
       });
-  }
+  },
 };
 
 export default new Vuex.Store({
   state,
   getters,
   mutations,
-  actions
+  actions,
 });
