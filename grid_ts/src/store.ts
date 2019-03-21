@@ -33,7 +33,6 @@ export const mutations = {
     state.rowSelected = data;
   },
   editUser(state: any, data: any) {
-    console.log(data);
     state.editing = data;
   },
 };
@@ -64,7 +63,7 @@ export const actions = {
       })
       .then(res => {
         console.log('hello', res);
-        return res;
+        commit('editUser', res);
       });
   },
 };

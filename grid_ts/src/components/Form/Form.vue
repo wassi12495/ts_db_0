@@ -10,12 +10,12 @@
       <form action="" @submit="handleSubmit($event)" id="form-create" >
         <div class="row">
           <div class="form-group col">
-            <label for="firstName">First Name</label>
-            <input type="text" class="form-control" placeholder="First Name" v-model="firstName" required>
+            <label for="first">First Name</label>
+            <input type="text" class="form-control" placeholder="First Name" v-model="first" required>
           </div>
           <div class="form-group col">
-            <label for="lastName">Last Name</label>
-            <input type="text" class="form-control" placeholder="Last Name" v-model="lastName" required>
+            <label for="last">Last Name</label>
+            <input type="text" class="form-control" placeholder="Last Name" v-model="last" required>
           </div>
         </div>
         <div class="row">
@@ -69,8 +69,8 @@ export default class Form extends Vue {
   @Action("newPerson") newPerson;
   @Action("getPeople") getPeople;
   @Action("testValidation") test;
-  private firstName: string = null;
-  private lastName: string = null;
+  private first: string = null;
+  private last: string = null;
   private birthday: string = null;
   private day: number;
   private month: number;
@@ -115,16 +115,16 @@ export default class Form extends Vue {
     e.preventDefault();
     console.log(e);
     console.log("Submit");
-    console.log("First", this.firstName);
-    console.log("Last", this.lastName);
+    console.log("First", this.first);
+    console.log("Last", this.last);
     console.log("Birthday", this.birthday);
 
     // console.log("Birthday", this.month, "-", this.day, "-", this.year);
     console.log("Email", this.email);
     console.log("Phone", this.phone);
     const person = {
-      firstName: this.firstName,
-      lastName: this.lastName,
+      first: this.first,
+      last: this.last,
       birthday: this.birthday,
 
       email: this.email,
