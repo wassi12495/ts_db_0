@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h1>Edit Form</h1>
-    {{greeting}}
+    <h1>Edit Form {{greeting}}</h1>
 
   </div>
 </template>
@@ -14,9 +13,7 @@ import { Watch } from "vue-property-decorator";
 
 @Component({})
 export default class EditForm extends Vue {
-  data: {
-    greeting: "Hello";
-  };
+  greeting: string = "hello";
 }
 </script>
 
