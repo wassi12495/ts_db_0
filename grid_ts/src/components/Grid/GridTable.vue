@@ -24,7 +24,7 @@ import { AgGridVue } from "ag-grid-vue";
 })
 export default class GridTable extends Vue {
   @Getter("people") people;
-  @Action("rowSelected") rowSelected;
+  @Action("userSelected") userSelected;
 
   data() {
     return {
@@ -63,11 +63,12 @@ export default class GridTable extends Vue {
     return formattedData;
   }
   onRowSelected(e: any) {
-    // console.log(e);
+    console.log(e);
+    this.userSelected(e.data);
     // this.rowSelected(e.data.id, this.$router);
     // console.log(this.$router);
 
-    this.$router.push(`/edit/${e.data.id}`);
+    this.$router.push(`/profile`);
   }
 }
 </script>

@@ -8,13 +8,13 @@ Vue.use(Vuex);
 
 export const state: any = {
   people: {},
-  rowSelected: null,
+  userSelected: null,
   editing: {},
 };
 
 export const getters = {
   people: (state: any) => state.people,
-  rowSelected: (state: any) => state.rowSelected,
+  userSelected: (state: any) => state.userSelected,
   editing: (state: any) => state.editing,
 };
 export const mutations = {
@@ -28,9 +28,9 @@ export const mutations = {
     state.people.push(data);
   },
 
-  rowSelected(state: any, data: any) {
-    console.log('Row Selected');
-    state.rowSelected = data;
+  userSelected(state: any, data: any) {
+    console.log(' User Selected Mutation', data);
+    state.userSelected = data;
   },
   editUser(state: any, data: any) {
     state.editing = data;
@@ -65,6 +65,11 @@ export const actions = {
         console.log('hello', res);
         commit('editUser', res);
       });
+  },
+
+  userSelected({ commit }: any, data: any) {
+    console.log('User Selected Action ', data);
+    commit('userSelected', data);
   },
 };
 
