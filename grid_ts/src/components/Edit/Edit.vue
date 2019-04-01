@@ -1,10 +1,7 @@
 <template>
   <div class="container">
-      <h1>Edit page</h1>
-      <EditForm
-      :v-if="this.data===undefined"
-      />
-     
+    <h1>Edit page</h1>
+    <EditForm/>
   </div>
 </template>
 
@@ -12,7 +9,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import axios from "axios";
-import { Action, Getter } from "vuex-class";
+import { Action, Getter, State } from "vuex-class";
 import { Watch } from "vue-property-decorator";
 
 import EditForm from "./EditForm.vue";
@@ -22,25 +19,25 @@ import EditForm from "./EditForm.vue";
   }
 })
 export default class Edit extends Vue {
-  @Action("rowSelected") rowSelected;
-  @Getter("editing") editing;
+  // @Action("rowSelected") rowSelected;
+  // @Getter("editing") editing;
+  @State("userSelected") user;
 
-  data: null;
-
-  mounted() {
-    // Fix this to be reactivie to changes in store.editing
-    console.log(this.data);
-    console.log("Edit container", this.$route.params);
-    this.rowSelected(this.$route.params.id);
-    console.log(this.editing);
+  created() {
+    if (this.user === null) {
+      this.$router.push("/");
+    } else {
+      console.log("Editing", this.user);
+      console.log("Edit container", this.$route.params);
+    }
   }
 
-  @Watch("editing")
-  onRecieveEditing() {
-    console.log("recieved", this.editing);
-    this.data = this.editing;
-    console.log(this.data);
-  }
+  // @Watch("editing")
+  // onRecieveEditing() {
+  //   console.log("recieved", this.editing);
+  //   this.data = this.editing;
+  //   console.log(this.data);
+  // }
 
   get first() {
     return this.first;
