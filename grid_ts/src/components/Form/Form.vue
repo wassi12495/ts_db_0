@@ -1,61 +1,64 @@
 <template>
   <div class="container">
     <div>
-      
-    <button @click="test">Test Validation</button>
+      <button @click="this.test">Test Validation</button>
     </div>
 
     <h1>New Person</h1>
-    <br>  
-      <form action="" @submit="handleSubmit($event)" id="form-create" >
-        <div class="row">
-          <div class="form-group col">
-            <label for="first">First Name</label>
-            <input type="text" class="form-control" placeholder="First Name" v-model="first" required>
-          </div>
-          <div class="form-group col">
-            <label for="last">Last Name</label>
-            <input type="text" class="form-control" placeholder="Last Name" v-model="last" required>
-          </div>
+    <br>
+    <form action @submit="handleSubmit($event)" id="form-create">
+      <div class="row">
+        <div class="form-group col">
+          <label for="first">First Name</label>
+          <input type="text" class="form-control" placeholder="First Name" v-model="first" required>
         </div>
-        <div class="row">
-          <div class="form-group col-sm-4">
-            <label for="birthday">Birthday</label>
-            <input class="form-control" type="date" v-model="birthday" required>
-          </div>
+        <div class="form-group col">
+          <label for="last">Last Name</label>
+          <input type="text" class="form-control" placeholder="Last Name" v-model="last" required>
         </div>
-        <div class="row">
-          <div class="form-group col">
-              <label for="email">Email Address</label>
-              <input 
-              type="email" 
-              class="form-control"  
-              id="email" 
-              placeholder="Email Address" 
-              v-model="email" 
-              :pattern="emailPattern" 
-              :title="emailErrorMsg"
-              required>
-          </div>
-          <div class="form-group col">  
-              <label for="phone">Phone Number</label>
-              <input type="tel" class="form-control" 
-              placeholder="(xxx)-xxx-xxxx" 
-              pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
-              required v-model="phone">
-          </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-4">
+          <label for="birthday">Birthday</label>
+          <input class="form-control" type="date" v-model="birthday" required>
         </div>
-        <!-- <div class="row">
+      </div>
+      <div class="row">
+        <div class="form-group col">
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="Email Address"
+            v-model="email"
+            :pattern="emailPattern"
+            :title="emailErrorMsg"
+            required
+          >
+        </div>
+        <div class="form-group col">
+          <label for="phone">Phone Number</label>
+          <input
+            type="tel"
+            class="form-control"
+            placeholder="(xxx)-xxx-xxxx"
+            pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+            required
+            v-model="phone"
+          >
+        </div>
+      </div>
+      <!-- <div class="row">
 
           <div class="form-group">
             Test Phone Number: (<input  type="tel" :pattern="areaCodePattern" maxlength="3" size="3">) 
             - <input type="tel" size="3">  
             - <input type="tel" size="4">
           </div>
-        </div> -->
-        <input class="btn btn-primary" type="submit">
-      </form>
-
+      </div>-->
+      <input class="btn btn-primary" type="submit">
+    </form>
   </div>
 </template>
 
@@ -65,10 +68,11 @@ import Component from "vue-class-component";
 import axios from "axios";
 import { Action } from "vuex-class";
 import { Watch } from "vue-property-decorator";
+@Component({})
 export default class Form extends Vue {
   @Action("newPerson") newPerson;
   @Action("getPeople") getPeople;
-  @Action("testValidation") test;
+  @Action("testValidation") testValidation;
   private first: string = null;
   private last: string = null;
   private birthday: string = null;
@@ -107,7 +111,10 @@ export default class Form extends Vue {
   get areaCodePattern() {
     return "[0-9]{3}";
   }
-
+  test(e: any) {
+    console.log("this", this);
+    this.testValidation();
+  }
   handleSubmit(e: any) {
     // axios.get("localhost:9000").then(resp => {
     //   console.log(resp);
