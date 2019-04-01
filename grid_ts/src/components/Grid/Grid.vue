@@ -1,15 +1,14 @@
 <template>
-  <div class="container" >
+  <div class="container">
     <!-- <div>
         <h1>People</h1>
           <ul v-if="this.people!==undefined">
             <li :v-for="item in this.people"> {{item}}</li>
           </ul>
-    </div> -->
-  
-      <GridTable ></GridTable>
+    </div>-->
 
-    </div>
+    <GridTable :people="gridData"></GridTable>
+  </div>
 </template>
 
 <script lang="ts">
@@ -30,8 +29,18 @@ import GridTable from "./GridTable.vue";
 export default class Grid extends Vue {
   @State("people") people;
   @Action("getPeople") getPeople;
+
   created() {
-    this.getPeople();
+    if (this.people === null) {
+      this.getPeople();
+    }
+  }
+  mounted() {
+    console.log("People mount", this.people);
+  }
+
+  get gridData() {
+    return this.people;
   }
 }
 </script>

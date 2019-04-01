@@ -66,13 +66,15 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import axios from "axios";
-import { Action } from "vuex-class";
+import { Action, State, Getter } from "vuex-class";
 import { Watch } from "vue-property-decorator";
 @Component({})
 export default class Form extends Vue {
+  @Getter("newUserAsync") newUserAsync;
   @Action("newPerson") newPerson;
   @Action("getPeople") getPeople;
   @Action("testValidation") testValidation;
+
   private first: string = null;
   private last: string = null;
   private birthday: string = null;
@@ -138,13 +140,13 @@ export default class Form extends Vue {
       phone: this.phone
     };
     console.log(person);
-    this.newPerson(person)
-      .then(resp => {
-        this.$router.push("/");
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    this.newPerson(person);
+  }
+  @Watch("newUserAsync")
+  onNewUserAsyncChanged() {
+    if (this.newUserAsync === false) {
+      this.$router.push("/");
+    }
   }
 }
 </script>

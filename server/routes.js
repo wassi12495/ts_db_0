@@ -21,7 +21,7 @@ let sample2 = {
   birthday: '2999-09-17',
   email: 'email@address.com',
   phone: '7777777777',
-  id: 10
+  id: 1
 };
 
 people[`${sample1.id}`] = sample1;
@@ -31,18 +31,12 @@ router.get('/users', (req, res) => {
   res.send(people);
 });
 
-// router.post('/createPerson', (req, res) => {
-//   console.log(req.body);
-//   people.push(req.body);
-//   res.send(req.body);
-// });
-
 // Testing schema
 var Ajv = require('ajv');
 var ajv = new Ajv();
 var validationSchema = require('./schemas/validation_schema.json');
 var validate = ajv.compile(validationSchema);
-
+var id = 2;
 let data = {
   first: 'Josh',
   last: 'wasserman',
@@ -55,17 +49,26 @@ let data = {
 
 // "pattern": "^[a-zA-Z0-9._%+-]+@[a-z0-9]+.[a-z]{3}$"
 
-router.post('/test', (req, res) => {
+router.post('/users/new', (req, res) => {
   // console.log(validate);
-  console.log(data);
-  var valid = validate(data);
+  console.log('Recieved new person');
+  console.log(req.body);
+  let newUser = req.body;
+
+  var valid = validate(req.body);
 
   console.log(valid);
-  if (!valid) console.log(validate.errors);
-  else {
-    people.push(req.body);
+  if (!valid) {
+    console.log(validate.errors);
+    res.send(valid);
+  } else {
+    newUser['id'] = id;
+    console.log(newUser);
+    people[newUser.id] = newUser;
+    console.log('peopel array', people);
+    id++;
+    res.send(newUser);
   }
-  res.send(valid);
 });
 module.exports = {
   router
@@ -79,3 +82,9 @@ router.get(`/user/:id`, (req, res) => {
   console.log(res.body);
   res.send(res.body);
 });
+
+// router.post('/createPerson', (req, res) => {
+//   console.log(req.body);
+//   people.push(req.body);
+//   res.send(req.body);
+// });

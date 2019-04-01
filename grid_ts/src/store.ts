@@ -7,15 +7,17 @@ import Axios from 'axios';
 Vue.use(Vuex);
 
 export const state: any = {
-  people: {},
+  people: null,
   userSelected: null,
   editing: {},
+  newUserAsync: false
 };
 
 export const getters = {
   people: (state: any) => state.people,
   userSelected: (state: any) => state.userSelected,
   editing: (state: any) => state.editing,
+  newUserAsync: (state: any) => state.newUserAsync
 };
 export const mutations = {
   setPeople(state: any, data: any[]) {
@@ -24,8 +26,11 @@ export const mutations = {
   },
 
   personCreated(state: any, data: any) {
-    console.log('Add newly created person', data);
-    state.people.push(data);
+    state.people[data.id] = data;
+    // async in progress
+    state.newUserAsync = false;
+    console.log('Async Complete');
+    console.log('Add newly created person', state.people);
   },
 
   userSelected(state: any, data: any) {
@@ -35,6 +40,10 @@ export const mutations = {
   editUser(state: any, data: any) {
     state.editing = data;
   },
+  createUserInProgress(state: any) {
+    state.newUserAsync = true;
+    console.log('async in progress', state.newUserAsync);
+  }
 };
 
 export const actions = {
@@ -45,7 +54,8 @@ export const actions = {
     });
   },
   newPerson({ commit }: any, person: any) {
-    Axios.post('http://localhost:9000/createPerson', person).then(resp => {
+    commit('createUserInProgress');
+    Axios.post('http://localhost:9000/users/new', person).then(resp => {
       console.log(resp);
       commit('personCreated', resp.data);
     });
@@ -70,12 +80,12 @@ export const actions = {
   userSelected({ commit }: any, data: any) {
     console.log('User Selected Action ', data);
     commit('userSelected', data);
-  },
+  }
 };
 
 export default new Vuex.Store({
   state,
   getters,
   mutations,
-  actions,
+  actions
 });

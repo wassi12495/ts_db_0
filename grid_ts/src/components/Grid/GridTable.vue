@@ -14,7 +14,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import Prop from "vue-property-decorator";
+import { Prop, Watch } from "vue-property-decorator";
 import { State, Getter, Action } from "vuex-class";
 import { AgGridVue } from "ag-grid-vue";
 
@@ -24,9 +24,14 @@ import { AgGridVue } from "ag-grid-vue";
   }
 })
 export default class GridTable extends Vue {
-  @Getter("people") people;
+  @State("people") statePeople;
   @Action("userSelected") userSelected;
+  @Prop() people: any;
 
+  created() {
+    let list = this.statePeople;
+    console.log("created", list);
+  }
   data() {
     return {
       columnDefs: [
@@ -39,6 +44,7 @@ export default class GridTable extends Vue {
       ]
     };
   }
+
   get rowData() {
     // User data formatted for ag_grid
     console.log(this.people);

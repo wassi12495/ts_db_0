@@ -1,11 +1,11 @@
 {
   "type": "object",
   "properties": {
-    "firstName": {
+    "first": {
       "type": "string",
       "description": "The Person's first name"
     },
-    "lastName": {
+    "last": {
       "type": "string",
       "description": "The Person's last name"
     },
@@ -30,7 +30,7 @@
       "type": "string"
     }
   },
-  "required": ["firstName", "email", "phone", "birthday"],
+  "required": ["first", "email", "phone", "birthday"],
   "dependencies": {
     "credit_card": ["billing_address"]
   }
