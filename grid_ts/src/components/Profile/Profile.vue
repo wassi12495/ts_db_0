@@ -1,12 +1,13 @@
 <template>
-  <div>
+  <div :v-if="this.userSelected !== null">
     <h1>Profile</h1>
     <button>Edit</button>
     <br>
-    <h2>Name: {{this.fullName}}</h2>
-    <h2>Phone: {{this.phone}}</h2>
-    <h2>Email: {{this.email}}</h2>
-    <h2>Birthday: {{this.birthday}}</h2>
+
+    <h2>Name: {{fullName}}</h2>
+    <h2>Phone: {{phone}}</h2>
+    <h2>Email: {{email}}</h2>
+    <h2>Birthday: {{phone}}</h2>
   </div>
 </template>
 
@@ -16,26 +17,32 @@ import Component from "vue-class-component";
 import { Action, Getter } from "vuex-class";
 @Component({})
 export default class Profile extends Vue {
-  data() {
-    return {
-      fullName: null,
-      birthday: null,
-      phone: null,
-      email: null,
-      id: null
-    };
+  @Getter("userSelected") userSelected;
+
+  created() {
+    console.log("created", this.userSelected);
+    if (this.userSelected === null) {
+      console.log("created inside", this.userSelected);
+
+      this.$router.push("/");
+    }
   }
 
-  @Getter("userSelected") userSelected;
-  mounted() {
-    console.log("Mounted  Profile Page", this.userSelected);
-
-    this.fullName = `${this.userSelected.first}` + ` ${this.userSelected.last}`;
-    this.birthday = this.userSelected.birthday;
-    this.phone = this.userSelected.phone;
-    this.email = this.userSelected.email;
-    this.id = this.userSelected.id;
-    console.log("data", this._data);
+  get fullName(): string {
+    console.log("full name", this.userSelected);
+    return `${this.userSelected.first}` + ` ${this.userSelected.last}`;
+  }
+  get birthday(): string {
+    return this.userSelected.birthday;
+  }
+  get phone(): string {
+    return this.userSelected.phone;
+  }
+  get email(): string {
+    return this.userSelected.email;
+  }
+  get id(): string {
+    return this.userSelected.id;
   }
 }
 </script>

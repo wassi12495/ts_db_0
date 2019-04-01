@@ -1,10 +1,11 @@
 <template>
   <ag-grid-vue
+    style="width: 1000px; height: 1000px;"
     class="grid ag-theme-material"
     :columnDefs="columnDefs"
     :rowData="rowData"
-    :enableFilter="true"
-    :enableSorting="true"
+    :filter="true"
+    :sortable="true"
     rowSelection="single"
     @row-selected="onRowSelected"
   ></ag-grid-vue>
