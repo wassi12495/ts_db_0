@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>Edit page</h1>
-    <EditForm/>
+    <EditForm :v-if="this.user !== null"/>
   </div>
 </template>
 
@@ -30,32 +30,6 @@ export default class Edit extends Vue {
       console.log("Editing", this.user);
       console.log("Edit container", this.$route.params);
     }
-  }
-
-  // @Watch("editing")
-  // onRecieveEditing() {
-  //   console.log("recieved", this.editing);
-  //   this.data = this.editing;
-  //   console.log(this.data);
-  // }
-
-  get first() {
-    return this.first;
-  }
-  get last() {
-    return this.last;
-  }
-  get email() {
-    return this.email;
-  }
-  get phone() {
-    return this.phone;
-  }
-  get birthday() {
-    return this.birthday;
-  }
-  get id() {
-    return this.id;
   }
 }
 </script>
