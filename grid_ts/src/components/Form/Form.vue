@@ -49,14 +49,7 @@
           >
         </div>
       </div>
-      <!-- <div class="row">
-
-          <div class="form-group">
-            Test Phone Number: (<input  type="tel" :pattern="areaCodePattern" maxlength="3" size="3">) 
-            - <input type="tel" size="3">  
-            - <input type="tel" size="4">
-          </div>
-      </div>-->
+   
       <input class="btn btn-primary" type="submit">
     </form>
   </div>

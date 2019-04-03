@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>Edit page</h1>
-    <EditForm :v-if="this.user !== null"/>
+    <EditForm v-if="this.user !== null"/>
   </div>
 </template>
 

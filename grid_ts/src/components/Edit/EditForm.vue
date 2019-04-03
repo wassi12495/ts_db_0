@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Edit Form</h1>
-    <form action @submit="handleSubmit($event)" id="form-create">
+    <form action @submit="handleSubmit($event)" id="form-edit">
       <div class="row">
         <div class="form-group col">
           <label for="first">First Name</label>
@@ -56,23 +56,63 @@ import { Watch } from "vue-property-decorator";
 export default class EditForm extends Vue {
   @State("userSelected") user;
 
+  private data: any = {};
+  created() {
+    console.log("Edit form created", this.user);
+    const { first, last, email, phone, birthday, id } = this.user;
+    this.data["first"] = first;
+    this.data["last"] = last;
+    this.data["email"] = email;
+    this.data["phone"] = phone;
+    this.data["birthday"] = birthday;
+    this.data["id"] = id;
+  }
   get first() {
     return this.user.first;
+  }
+
+  set first(e: string) {
+    console.log(e);
+    this.data["first"] = e;
   }
   get last() {
     return this.user.last;
   }
+  set last(e: string) {
+    console.log(e);
+    this.data["last"] = e;
+  }
   get email() {
     return this.user.email;
+  }
+  set email(e: string) {
+    console.log(e);
+    this.data["email"] = e;
   }
   get phone() {
     return this.user.phone;
   }
+  set phone(e: string) {
+    console.log(e);
+    this.data["phone"] = e;
+  }
   get birthday() {
     return this.user.birthday;
   }
+  set birthday(e: string) {
+    console.log(e);
+    this.data["birthday"] = e;
+  }
   get id() {
     return this.user.id;
+  }
+  set id(e: string) {
+    console.log(e);
+    this.data["id"] = e;
+  }
+  handleSubmit(e: any) {
+    e.preventDefault();
+    console.log("Submit Edit Form", e);
   }
 }
 </script>
