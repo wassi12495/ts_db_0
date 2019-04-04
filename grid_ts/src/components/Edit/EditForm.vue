@@ -49,13 +49,14 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import { Action, State } from "vuex-class";
+import { Action, State, Getter } from "vuex-class";
 import { Watch } from "vue-property-decorator";
 
 @Component({})
 export default class EditForm extends Vue {
   @State("userSelected") user;
   @Action("updateUser") updateUser;
+  @Getter("updateUserAsync") updateUserAsync;
   private data: any = {};
   created() {
     console.log("Edit form created", this.user);
@@ -72,42 +73,36 @@ export default class EditForm extends Vue {
   }
 
   set first(e: string) {
-    console.log(e);
     this.data["first"] = e;
   }
   get last() {
     return this.user.last;
   }
   set last(e: string) {
-    console.log(e);
     this.data["last"] = e;
   }
   get email() {
     return this.user.email;
   }
   set email(e: string) {
-    console.log(e);
     this.data["email"] = e;
   }
   get phone() {
     return this.user.phone;
   }
   set phone(e: string) {
-    console.log(e);
     this.data["phone"] = e;
   }
   get birthday() {
     return this.user.birthday;
   }
   set birthday(e: string) {
-    console.log(e);
     this.data["birthday"] = e;
   }
   get id() {
     return this.user.id;
   }
   set id(e: string) {
-    console.log(e);
     this.data["id"] = e;
   }
   handleSubmit(e: any) {
@@ -115,6 +110,13 @@ export default class EditForm extends Vue {
     console.log("Submit Edit Form", e);
     console.log(this.data);
     this.updateUser(this.data);
+  }
+
+  @Watch("updateUserAsync")
+  onUpdateUserAsyncChanged() {
+    if (this.updateUserAsync === false) {
+      this.$router.push("/");
+    }
   }
 }
 </script>

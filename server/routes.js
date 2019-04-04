@@ -81,7 +81,14 @@ router.get(`/user/:id`, (req, res) => {
 });
 
 router.put('/user/:id', (req, res) => {
-  console.log('update recieved', req.body);
+  let data = req.body;
+  console.log('update recieved', data);
+  let original = people[`${data.id}`];
+  console.log('pre update', original);
+  people[data.id] = data;
+  console.log('post update', people);
+  body = people[`${data.id}`];
+  res.send(body);
 });
 
 // router.post('/createPerson', (req, res) => {
