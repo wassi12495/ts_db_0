@@ -80,6 +80,13 @@ export const actions = {
   userSelected({ commit }: any, data: any) {
     console.log('User Selected Action ', data);
     commit('userSelected', data);
+  },
+
+  updateUser({ commit }: any, data: any) {
+    console.log('Update User', data);
+    Axios.put(`http://localhost:9000/user/${data.id}`, data).then(res => {
+      console.log(res);
+    });
   }
 };
 

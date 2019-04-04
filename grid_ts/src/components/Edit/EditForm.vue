@@ -5,17 +5,17 @@
       <div class="row">
         <div class="form-group col">
           <label for="first">First Name</label>
-          <input type="text" class="form-control" placeholder="First Name" v-model="first" >
+          <input type="text" class="form-control" placeholder="First Name" v-model="first">
         </div>
         <div class="form-group col">
           <label for="last">Last Name</label>
-          <input type="text" class="form-control" placeholder="Last Name" v-model="last" >
+          <input type="text" class="form-control" placeholder="Last Name" v-model="last">
         </div>
       </div>
       <div class="row">
         <div class="form-group col-sm-4">
           <label for="birthday">Birthday</label>
-          <input class="form-control" type="date" v-model="birthday" >
+          <input class="form-control" type="date" v-model="birthday">
         </div>
       </div>
       <div class="row">
@@ -40,7 +40,7 @@
           >
         </div>
       </div>
-    
+
       <input class="btn btn-primary" type="submit">
     </form>
   </div>
@@ -55,7 +55,7 @@ import { Watch } from "vue-property-decorator";
 @Component({})
 export default class EditForm extends Vue {
   @State("userSelected") user;
-
+  @Action("updateUser") updateUser;
   private data: any = {};
   created() {
     console.log("Edit form created", this.user);
@@ -113,6 +113,8 @@ export default class EditForm extends Vue {
   handleSubmit(e: any) {
     e.preventDefault();
     console.log("Submit Edit Form", e);
+    console.log(this.data);
+    this.updateUser(this.data);
   }
 }
 </script>

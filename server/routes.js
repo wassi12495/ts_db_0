@@ -70,9 +70,6 @@ router.post('/users/new', (req, res) => {
     res.send(newUser);
   }
 });
-module.exports = {
-  router
-};
 
 router.get(`/user/:id`, (req, res) => {
   const id = req.params.id;
@@ -83,8 +80,16 @@ router.get(`/user/:id`, (req, res) => {
   res.send(res.body);
 });
 
+router.put('/user/:id', (req, res) => {
+  console.log('update recieved', req.body);
+});
+
 // router.post('/createPerson', (req, res) => {
 //   console.log(req.body);
 //   people.push(req.body);
 //   res.send(req.body);
 // });
+
+module.exports = {
+  router
+};
