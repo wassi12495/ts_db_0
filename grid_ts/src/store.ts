@@ -11,7 +11,8 @@ export const state: any = {
   userSelected: null,
   editing: {},
   newUserAsync: false,
-  updateUserAsync: false
+  updateUserAsync: false,
+  validationSchema: null
 };
 
 export const getters = {
@@ -19,7 +20,8 @@ export const getters = {
   userSelected: (state: any) => state.userSelected,
   editing: (state: any) => state.editing,
   newUserAsync: (state: any) => state.newUserAsync,
-  updateUserAsync: (state: any) => state.updateUserAsync
+  updateUserAsync: (state: any) => state.updateUserAsync,
+  validationSchema: (state: any) => state.validationSchema
 };
 export const mutations = {
   setPeople(state: any, data: any[]) {
@@ -53,6 +55,9 @@ export const mutations = {
   },
   updateUserInProgress(state: any) {
     state.updateUserAsync = true;
+  },
+  validationSchema(state: any, data: any) {
+    state.validationSchema = data;
   }
 };
 
@@ -99,6 +104,17 @@ export const actions = {
       console.log(res.data);
       commit('userUpdated', res.data);
     });
+  },
+
+  getSchema({ commit }: any, data: any) {
+    fetch('http://localhost:9000/schema')
+      .then(res => {
+        return res.json();
+      })
+      .then(res => {
+        console.log(res);
+        commit('validationSchema', res);
+      });
   }
 };
 

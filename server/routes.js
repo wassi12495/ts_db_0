@@ -97,6 +97,9 @@ router.put('/user/:id', (req, res) => {
 //   res.send(req.body);
 // });
 
+router.get('/schema', (req, res) => {
+  res.send(validationSchema);
+});
 module.exports = {
   router
 };

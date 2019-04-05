@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="this.validationSchema">
     <h1>Edit Form</h1>
     <form action @submit="handleSubmit($event)" id="form-edit">
       <div class="row">
@@ -57,7 +57,9 @@ export default class EditForm extends Vue {
   @State("userSelected") user;
   @Action("updateUser") updateUser;
   @Getter("updateUserAsync") updateUserAsync;
+  @Getter("validationSchema") validationSchema;
   private data: any = {};
+  private schema: any = null;
   created() {
     console.log("Edit form created", this.user);
     const { first, last, email, phone, birthday, id } = this.user;
@@ -67,6 +69,7 @@ export default class EditForm extends Vue {
     this.data["phone"] = phone;
     this.data["birthday"] = birthday;
     this.data["id"] = id;
+    console.log(this.schema);
   }
   get first() {
     return this.user.first;
@@ -117,6 +120,11 @@ export default class EditForm extends Vue {
     if (this.updateUserAsync === false) {
       this.$router.push("/");
     }
+  }
+  @Watch("validationSchema")
+  onValidationSchemaChanged() {
+    this.schema = this.validationSchema.properties;
+    console.log(this.schema);
   }
 }
 </script>
