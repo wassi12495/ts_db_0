@@ -12,7 +12,8 @@ export const state: any = {
   editing: {},
   newUserAsync: false,
   updateUserAsync: false,
-  validationSchema: null
+  miscAsync: false,
+  validationSchema: null,
 };
 
 export const getters = {
@@ -21,7 +22,8 @@ export const getters = {
   editing: (state: any) => state.editing,
   newUserAsync: (state: any) => state.newUserAsync,
   updateUserAsync: (state: any) => state.updateUserAsync,
-  validationSchema: (state: any) => state.validationSchema
+  miscAsync: (state: any) => state.miscAsync,
+  validationSchema: (state: any) => state.validationSchema,
 };
 export const mutations = {
   setPeople(state: any, data: any[]) {
@@ -56,9 +58,14 @@ export const mutations = {
   updateUserInProgress(state: any) {
     state.updateUserAsync = true;
   },
+  miscAsyncInProgress(state: any) {
+    console.log('Misc Async now In Progress');
+    state.miscAsync = true;
+  },
   validationSchema(state: any, data: any) {
     state.validationSchema = data;
-  }
+    state.miscAsync = false;
+  },
 };
 
 export const actions = {
@@ -107,6 +114,8 @@ export const actions = {
   },
 
   getSchema({ commit }: any, data: any) {
+    commit('miscAsyncInProgress');
+
     fetch('http://localhost:9000/schema')
       .then(res => {
         return res.json();
@@ -115,12 +124,12 @@ export const actions = {
         console.log(res);
         commit('validationSchema', res);
       });
-  }
+  },
 };
 
 export default new Vuex.Store({
   state,
   getters,
   mutations,
-  actions
+  actions,
 });

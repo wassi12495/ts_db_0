@@ -19,11 +19,15 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Action, Getter, State } from "vuex-class";
+import { Watch } from "vue-property-decorator";
+
 @Component({})
 export default class Profile extends Vue {
   // @Getter("userSelected") userSelected;
   @State("userSelected") userSelected: any;
+  @Getter("miscAsync") miscAsync: any;
   @Action("getSchema") getSchema: any;
+
   created() {
     console.log("created", this.userSelected);
     if (this.userSelected === null) {
@@ -31,7 +35,7 @@ export default class Profile extends Vue {
 
       this.$router.push("/");
     } else {
-      this.getSchema();
+      // this.getSchema();
     }
   }
 
@@ -54,7 +58,15 @@ export default class Profile extends Vue {
 
   handleEdit() {
     console.log("Edit button clicked");
-    this.$router.push(`/edit/${this.id}`);
+    this.getSchema();
+  }
+
+  @Watch("miscAsync")
+  onMiscAsyncChange() {
+    console.log("Misc Async", this.miscAsync);
+    if (this.miscAsync === false) {
+      this.$router.push(`/edit/${this.id}`);
+    }
   }
 }
 </script>
