@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <div v-if="this.validationSchema !== undefined">
+    <div v-if="this.validationSchema !== null">
     <h1>Edit page</h1>
     <p>{{this.editable}}</p>
-    <EditForm v-if="this.user !== null"/>
+    <EditForm v-if="this.user !== null" :editable="editable"/>
 
     </div>
   </div>
@@ -44,9 +44,9 @@ export default class Edit extends Vue {
     let editableAttr = [];
     const vProps = this.validationSchema.properties;
     for (let i in vProps) {
-      console.log(i);
       if (vProps[i].editable === true) {
         console.log("Editable is true", vProps[i].editable);
+        editableAttr.push(i);
       }
     }
 

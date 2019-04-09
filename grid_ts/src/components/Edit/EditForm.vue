@@ -51,7 +51,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Action, State, Getter } from "vuex-class";
-import { Watch } from "vue-property-decorator";
+import { Watch, Prop } from "vue-property-decorator";
 
 @Component({})
 export default class EditForm extends Vue {
@@ -59,6 +59,7 @@ export default class EditForm extends Vue {
   @Action("updateUser") updateUser: any;
   @Getter("updateUserAsync") updateUserAsync: any;
   @Getter("validationSchema") validationSchema: any;
+  @Prop() editable: any;
   private data: any = {};
   private schema: any = null;
   // beforeCreate() {
@@ -67,6 +68,7 @@ export default class EditForm extends Vue {
   //   this.schema = this.validationSchema;
   // }
   created() {
+    console.log(this.editable);
     this.schema = this.validationSchema.properties;
     console.log("Edit form created", this.user);
     const { first, last, email, phone, birthday, id } = this.user;
