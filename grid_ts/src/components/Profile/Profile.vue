@@ -22,14 +22,16 @@ import { Action, Getter, State } from "vuex-class";
 @Component({})
 export default class Profile extends Vue {
   // @Getter("userSelected") userSelected;
-  @State("userSelected") userSelected;
-
+  @State("userSelected") userSelected: any;
+  @Action("getSchema") getSchema: any;
   created() {
     console.log("created", this.userSelected);
     if (this.userSelected === null) {
       console.log("created inside", this.userSelected);
 
       this.$router.push("/");
+    } else {
+      this.getSchema();
     }
   }
 

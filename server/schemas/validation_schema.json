@@ -4,27 +4,37 @@
     "first": {
       "type": "string",
       "description": "The Person's first name",
-      "editable": "true"
+      "editable": "true",
+      "calltag": "first"
     },
     "last": {
       "type": "string",
       "description": "The Person's last name",
-      "editable": "true"
+      "editable": "true",
+      "calltag": "last"
     },
     "email": {
       "type": "string",
       "format": "email",
-      "editable": "true"
+      "editable": "true",
+      "calltag": "email"
     },
     "birthday": {
       "type": "string",
       "format": "date",
-      "editable": "false"
+      "editable": "false",
+      "calltag": "birthday"
     },
     "phone": {
       "type": "string",
       "pattern": "^([0-9]{3})?[0-9]{3}[0-9]{4}$",
-      "editable": "true"
+      "editable": "true",
+      "calltag": "phone"
+    },
+    "id": {
+      "type": "number",
+      "description": "User ID assigned automatically",
+      "calltag": "id"
     },
     "credit_card": {
       "type": "number"

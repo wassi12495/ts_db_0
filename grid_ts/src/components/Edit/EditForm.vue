@@ -1,21 +1,21 @@
 <template>
-  <div v-if="this.validationSchema">
+  <div v-if="this.schema !== null">
     <h1>Edit Form</h1>
     <form action @submit="handleSubmit($event)" id="form-edit">
       <div class="row">
         <div class="form-group col">
           <label for="first">First Name</label>
-          <input type="text" class="form-control" placeholder="First Name" v-model="first">
+          <input type="text" class="form-control" :id="this.calltag('first')" placeholder="First Name" v-model="first">
         </div>
         <div class="form-group col">
           <label for="last">Last Name</label>
-          <input type="text" class="form-control" placeholder="Last Name" v-model="last">
+          <input type="text" class="form-control" :id="this.calltag('last')" placeholder="Last Name" v-model="last">
         </div>
       </div>
       <div class="row">
         <div class="form-group col-sm-4">
           <label for="birthday">Birthday</label>
-          <input class="form-control" type="date" v-model="birthday">
+          <input class="form-control" :id="this.calltag('birthday')" type="date" v-model="birthday">
         </div>
       </div>
       <div class="row">
@@ -24,7 +24,7 @@
           <input
             type="email"
             class="form-control"
-            id="email"
+            :id="this.calltag('email')"
             placeholder="Email Address"
             v-model="email"
           >
@@ -34,6 +34,7 @@
           <input
             type="tel"
             class="form-control"
+            :id="this.calltag('phone')"
             placeholder="(xxx)-xxx-xxxx"
             pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
             v-model="phone"
@@ -54,13 +55,19 @@ import { Watch } from "vue-property-decorator";
 
 @Component({})
 export default class EditForm extends Vue {
-  @State("userSelected") user;
-  @Action("updateUser") updateUser;
-  @Getter("updateUserAsync") updateUserAsync;
-  @Getter("validationSchema") validationSchema;
+  @State("userSelected") user: any;
+  @Action("updateUser") updateUser: any;
+  @Getter("updateUserAsync") updateUserAsync: any;
+  @Getter("validationSchema") validationSchema: any;
   private data: any = {};
   private schema: any = null;
+  // beforeCreate() {
+  //   console.log("Edit Form", this.validationSchema);
+  //   debugger;
+  //   this.schema = this.validationSchema;
+  // }
   created() {
+    this.schema = this.validationSchema.properties;
     console.log("Edit form created", this.user);
     const { first, last, email, phone, birthday, id } = this.user;
     this.data["first"] = first;
@@ -69,7 +76,14 @@ export default class EditForm extends Vue {
     this.data["phone"] = phone;
     this.data["birthday"] = birthday;
     this.data["id"] = id;
+
     console.log(this.schema);
+  }
+
+  calltag(attribute: string) {
+    let tag = this.schema[`${attribute}`].calltag;
+    console.log("calltag", tag);
+    return tag;
   }
   get first() {
     return this.user.first;

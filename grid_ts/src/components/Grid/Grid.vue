@@ -27,8 +27,8 @@ import GridTable from "./GridTable.vue";
   }
 })
 export default class Grid extends Vue {
-  @State("people") people;
-  @Action("getPeople") getPeople;
+  @State("people") people: any;
+  @Action("getPeople") getPeople: any;
 
   created() {
     if (this.people === null) {

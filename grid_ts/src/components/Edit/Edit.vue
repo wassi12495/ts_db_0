@@ -21,8 +21,8 @@ import EditForm from "./EditForm.vue";
 export default class Edit extends Vue {
   // @Action("rowSelected") rowSelected;
   // @Getter("editing") editing;
-  @State("userSelected") user;
-  @Action("getSchema") getSchema;
+  @State("userSelected") user: any;
+  @Action("getSchema") getSchema: any;
 
   created() {
     if (this.user === null) {

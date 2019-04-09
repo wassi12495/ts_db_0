@@ -63,19 +63,19 @@ import { Action, State, Getter } from "vuex-class";
 import { Watch } from "vue-property-decorator";
 @Component({})
 export default class Form extends Vue {
-  @Getter("newUserAsync") newUserAsync;
-  @Action("newPerson") newPerson;
-  @Action("getPeople") getPeople;
-  @Action("testValidation") testValidation;
+  @Getter("newUserAsync") newUserAsync: any;
+  @Action("newPerson") newPerson: any;
+  @Action("getPeople") getPeople: any;
+  @Action("testValidation") testValidation: any;
 
-  private first: string = null;
-  private last: string = null;
-  private birthday: string = null;
-  private day: number;
-  private month: number;
-  private year: number;
-  private email: string = null;
-  private phone: string = null;
+  private first: any = null;
+  private last: any = null;
+  private birthday: any = null;
+  private day: any;
+  private month: any;
+  private year: any;
+  private email: any = null;
+  private phone: any = null;
   // onChange(name: string): void {}
 
   checkStatus(value: any) {

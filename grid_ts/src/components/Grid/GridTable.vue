@@ -24,8 +24,8 @@ import { AgGridVue } from "ag-grid-vue";
   }
 })
 export default class GridTable extends Vue {
-  @State("people") statePeople;
-  @Action("userSelected") userSelected;
+  @State("people") statePeople: any;
+  @Action("userSelected") userSelected: any;
   @Prop() people: any;
 
   created() {
@@ -55,17 +55,6 @@ export default class GridTable extends Vue {
       console.log(p);
       formattedData.push(p);
     }
-    // const formattedData: any = this.people.forEach((p: any) => {
-    //   console.log(p);
-    //   // return {
-    //   //   first: k.firstName,
-    //   //   last: k.lastName,
-    //   //   birthday: k.birthday,
-    //   //   email: k.email,
-    //   //   khone: k.khone,
-    //   //   id: k.id
-    //   // };
-    // });
     console.log(formattedData);
     return formattedData;
   }
