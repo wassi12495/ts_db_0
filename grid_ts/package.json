@@ -12,15 +12,15 @@
     "ag-grid-vue": "^20.2.0",
     "ajv": "^6.10.0",
     "axios": "^0.18.0",
-    "bootstrap-vue": "^2.0.0-rc.16",
+    "bootstrap-vue": "^2.0.0-rc.18",
     "jquery": "^3.3.1",
-    "node": "^11.12.0",
+    "node": "^11.13.0",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
     "vue-class-component": "^6.0.0",
     "vue-cli": "^2.9.6",
     "vue-property-decorator": "^7.0.0",
-    "vue-router": "^3.0.1",
+    "vue-router": "^3.0.3",
     "vuex": "^3.0.1",
     "vuex-class": "^0.3.2"
   },
@@ -28,7 +28,7 @@
     "@vue/cli-plugin-pwa": "^3.5.1",
     "@vue/cli-plugin-typescript": "^3.5.3",
     "@vue/cli-service": "^3.5.3",
-    "typescript": "^3.4.1",
+    "typescript": "^3.4.2",
     "vue-template-compiler": "^2.6.10"
   }
 }
