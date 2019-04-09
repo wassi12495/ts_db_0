@@ -1,21 +1,21 @@
 <template>
-  <div>
+  <div v-if="this.validationSchema">
     <h1>Edit Form</h1>
     <form action @submit="handleSubmit($event)" id="form-edit">
       <div class="row">
         <div class="form-group col">
           <label for="first">First Name</label>
-          <input type="text" class="form-control" placeholder="First Name" v-model="first" >
+          <input type="text" class="form-control" placeholder="First Name" v-model="first">
         </div>
         <div class="form-group col">
           <label for="last">Last Name</label>
-          <input type="text" class="form-control" placeholder="Last Name" v-model="last" >
+          <input type="text" class="form-control" placeholder="Last Name" v-model="last">
         </div>
       </div>
       <div class="row">
         <div class="form-group col-sm-4">
           <label for="birthday">Birthday</label>
-          <input class="form-control" type="date" v-model="birthday" >
+          <input class="form-control" type="date" v-model="birthday">
         </div>
       </div>
       <div class="row">
@@ -40,7 +40,7 @@
           >
         </div>
       </div>
-    
+
       <input class="btn btn-primary" type="submit">
     </form>
   </div>
@@ -49,14 +49,17 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import { Action, State } from "vuex-class";
+import { Action, State, Getter } from "vuex-class";
 import { Watch } from "vue-property-decorator";
 
 @Component({})
 export default class EditForm extends Vue {
   @State("userSelected") user;
-
+  @Action("updateUser") updateUser;
+  @Getter("updateUserAsync") updateUserAsync;
+  @Getter("validationSchema") validationSchema;
   private data: any = {};
+  private schema: any = null;
   created() {
     console.log("Edit form created", this.user);
     const { first, last, email, phone, birthday, id } = this.user;
@@ -66,53 +69,62 @@ export default class EditForm extends Vue {
     this.data["phone"] = phone;
     this.data["birthday"] = birthday;
     this.data["id"] = id;
+    console.log(this.schema);
   }
   get first() {
     return this.user.first;
   }
 
   set first(e: string) {
-    console.log(e);
     this.data["first"] = e;
   }
   get last() {
     return this.user.last;
   }
   set last(e: string) {
-    console.log(e);
     this.data["last"] = e;
   }
   get email() {
     return this.user.email;
   }
   set email(e: string) {
-    console.log(e);
     this.data["email"] = e;
   }
   get phone() {
     return this.user.phone;
   }
   set phone(e: string) {
-    console.log(e);
     this.data["phone"] = e;
   }
   get birthday() {
     return this.user.birthday;
   }
   set birthday(e: string) {
-    console.log(e);
     this.data["birthday"] = e;
   }
   get id() {
     return this.user.id;
   }
   set id(e: string) {
-    console.log(e);
     this.data["id"] = e;
   }
   handleSubmit(e: any) {
     e.preventDefault();
     console.log("Submit Edit Form", e);
+    console.log(this.data);
+    this.updateUser(this.data);
+  }
+
+  @Watch("updateUserAsync")
+  onUpdateUserAsyncChanged() {
+    if (this.updateUserAsync === false) {
+      this.$router.push("/");
+    }
+  }
+  @Watch("validationSchema")
+  onValidationSchemaChanged() {
+    this.schema = this.validationSchema.properties;
+    console.log(this.schema);
   }
 }
 </script>

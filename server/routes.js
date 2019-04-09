@@ -70,9 +70,6 @@ router.post('/users/new', (req, res) => {
     res.send(newUser);
   }
 });
-module.exports = {
-  router
-};
 
 router.get(`/user/:id`, (req, res) => {
   const id = req.params.id;
@@ -83,8 +80,26 @@ router.get(`/user/:id`, (req, res) => {
   res.send(res.body);
 });
 
+router.put('/user/:id', (req, res) => {
+  let data = req.body;
+  console.log('update recieved', data);
+  let original = people[`${data.id}`];
+  console.log('pre update', original);
+  people[data.id] = data;
+  console.log('post update', people);
+  body = people[`${data.id}`];
+  res.send(body);
+});
+
 // router.post('/createPerson', (req, res) => {
 //   console.log(req.body);
 //   people.push(req.body);
 //   res.send(req.body);
 // });
+
+router.get('/schema', (req, res) => {
+  res.send(validationSchema);
+});
+module.exports = {
+  router
+};

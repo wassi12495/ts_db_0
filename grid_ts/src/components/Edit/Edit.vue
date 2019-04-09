@@ -22,11 +22,13 @@ export default class Edit extends Vue {
   // @Action("rowSelected") rowSelected;
   // @Getter("editing") editing;
   @State("userSelected") user;
+  @Action("getSchema") getSchema;
 
   created() {
     if (this.user === null) {
       this.$router.push("/");
     } else {
+      this.getSchema();
       console.log("Editing", this.user);
       console.log("Edit container", this.$route.params);
     }

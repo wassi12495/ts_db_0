@@ -3,15 +3,18 @@
   "properties": {
     "first": {
       "type": "string",
-      "description": "The Person's first name"
+      "description": "The Person's first name",
+      "editable": "true"
     },
     "last": {
       "type": "string",
-      "description": "The Person's last name"
+      "description": "The Person's last name",
+      "editable": "true"
     },
     "email": {
       "type": "string",
-      "format": "email"
+      "format": "email",
+      "editable": "true"
     },
     "birthday": {
       "type": "string",

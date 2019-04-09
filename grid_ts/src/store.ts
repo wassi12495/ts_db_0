@@ -10,14 +10,18 @@ export const state: any = {
   people: null,
   userSelected: null,
   editing: {},
-  newUserAsync: false
+  newUserAsync: false,
+  updateUserAsync: false,
+  validationSchema: null
 };
 
 export const getters = {
   people: (state: any) => state.people,
   userSelected: (state: any) => state.userSelected,
   editing: (state: any) => state.editing,
-  newUserAsync: (state: any) => state.newUserAsync
+  newUserAsync: (state: any) => state.newUserAsync,
+  updateUserAsync: (state: any) => state.updateUserAsync,
+  validationSchema: (state: any) => state.validationSchema
 };
 export const mutations = {
   setPeople(state: any, data: any[]) {
@@ -32,6 +36,11 @@ export const mutations = {
     console.log('Async Complete');
     console.log('Add newly created person', state.people);
   },
+  userUpdated(state: any, data: any) {
+    console.log('user updated', data);
+    state.people[data.id] = data;
+    state.updateUserAsync = false;
+  },
 
   userSelected(state: any, data: any) {
     console.log(' User Selected Mutation', data);
@@ -43,6 +52,12 @@ export const mutations = {
   createUserInProgress(state: any) {
     state.newUserAsync = true;
     console.log('async in progress', state.newUserAsync);
+  },
+  updateUserInProgress(state: any) {
+    state.updateUserAsync = true;
+  },
+  validationSchema(state: any, data: any) {
+    state.validationSchema = data;
   }
 };
 
@@ -80,6 +95,26 @@ export const actions = {
   userSelected({ commit }: any, data: any) {
     console.log('User Selected Action ', data);
     commit('userSelected', data);
+  },
+
+  updateUser({ commit }: any, data: any) {
+    console.log('Update User', data);
+    commit('updateUserInProgress');
+    Axios.put(`http://localhost:9000/user/${data.id}`, data).then(res => {
+      console.log(res.data);
+      commit('userUpdated', res.data);
+    });
+  },
+
+  getSchema({ commit }: any, data: any) {
+    fetch('http://localhost:9000/schema')
+      .then(res => {
+        return res.json();
+      })
+      .then(res => {
+        console.log(res);
+        commit('validationSchema', res);
+      });
   }
 };
 
