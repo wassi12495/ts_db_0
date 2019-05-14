@@ -13,9 +13,13 @@
         </div>
       </div>
       <div class="row">
-        <div class="form-group col-sm-4">
+        <div v-if="this.schema.birthday.editable" class="form-group col-sm-4">
           <label for="birthday">Birthday</label>
           <input class="form-control" :id="this.calltag('birthday')" type="date" v-model="birthday">
+        </div>
+        <div v-else class="form-group col-sm-4">
+          <label for="birthday">Birthday</label>
+          <p>{{this.birthday}}</p>
         </div>
       </div>
       <div class="row">

@@ -3,7 +3,7 @@
     <div v-if="this.validationSchema !== null">
     <h1>Edit page</h1>
     <p>{{this.editable}}</p>
-    <EditForm v-if="this.user !== null" :editable="editable"/>
+    <EditForm v-if="this.user !== null" :editable="editable" />
 
     </div>
   </div>
