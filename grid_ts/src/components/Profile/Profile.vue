@@ -3,11 +3,16 @@
     <div v-if="this.userSelected !== null">
       <h1>Profile</h1>
       <button @click="handleEdit">Edit</button>
+
       <br>
-      <h2>Name: {{fullName}}</h2>
+
+      <h2>Name: {{fullName}}  #{{id}}</h2>
       <h2>Phone: {{phone}}</h2>
       <h2>Email: {{email}}</h2>
       <h2>Birthday: {{phone}}</h2>
+
+      <br>
+      <button @click="handleDelete">Delete</button>
     </div>
     <div v-else>
       <p>relocating</p>
@@ -27,6 +32,7 @@ export default class Profile extends Vue {
   @State("userSelected") userSelected: any;
   @Getter("miscAsync") miscAsync: any;
   @Action("getSchema") getSchema: any;
+  @Action("deleteUser") deleteUser: any;
 
   created() {
     console.log("created", this.userSelected);
@@ -59,6 +65,16 @@ export default class Profile extends Vue {
   handleEdit() {
     console.log("Edit button clicked");
     this.getSchema();
+  }
+
+  handleDelete() {
+    console.log("Delete user");
+    if (confirm("Would you like to delter this user?")) {
+      console.log("confirmed");
+      this.deleteUser(this.userSelected);
+    } else {
+      console.log("Cancelled");
+    }
   }
 
   @Watch("miscAsync")
