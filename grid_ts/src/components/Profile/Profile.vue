@@ -31,6 +31,7 @@ export default class Profile extends Vue {
   // @Getter("userSelected") userSelected;
   @State("userSelected") userSelected: any;
   @Getter("miscAsync") miscAsync: any;
+  @Getter("deleteAsync") deleteAsync: any;
   @Action("getSchema") getSchema: any;
   @Action("deleteUser") deleteUser: any;
 
@@ -82,6 +83,14 @@ export default class Profile extends Vue {
     console.log("Misc Async", this.miscAsync);
     if (this.miscAsync === false) {
       this.$router.push(`/edit/${this.id}`);
+    }
+  }
+
+  @Watch("deleteAsync")
+  onDeleteAsync() {
+    console.log("delete async", this.deleteAsync);
+    if (this.deleteAsync === false) {
+      this.$router.push("/");
     }
   }
 }

@@ -14,6 +14,7 @@ export const state: any = {
   updateUserAsync: false,
   miscAsync: false,
   validationSchema: null,
+  deleteAsync: false,
 }
 
 export const getters = {
@@ -24,6 +25,7 @@ export const getters = {
   updateUserAsync: (state: any) => state.updateUserAsync,
   miscAsync: (state: any) => state.miscAsync,
   validationSchema: (state: any) => state.validationSchema,
+  deleteAsync: (state: any) => state.deleteAsync,
 }
 export const mutations = {
   setPeople(state: any, data: any[]) {
@@ -65,6 +67,9 @@ export const mutations = {
   validationSchema(state: any, data: any) {
     state.validationSchema = data
     state.miscAsync = false
+  },
+  deleteInProgress(state: any, data: any) {
+    state.deleteAsync = data
   },
 }
 
@@ -127,11 +132,12 @@ export const actions = {
   },
   deleteUser({ commit }: any, data: any) {
     console.log(data)
-    commit("miscAsyncInProgress")
+    commit("deleteInProgress", true)
 
     Axios.delete(`http://localhost:9000/user/${data.id}`, data).then(resp => {
       console.log(resp)
-      commit("setPeople", res.data)
+      commit("setPeople", resp.data)
+      commit("deleteInProgress", false)
     })
   },
 }
